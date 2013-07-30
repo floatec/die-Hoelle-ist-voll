@@ -13,6 +13,7 @@ namespace DieHoelleIstVoll
         protected Vector2 position;
         protected Color color;
         protected float scale;
+        protected float rotate = 0.0f;
 
         public EntityManager EntityManager
         {
@@ -65,7 +66,7 @@ namespace DieHoelleIstVoll
 
         public virtual void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(texture, position, null, color, 0.0f, Vector2.Zero, scale, SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(texture, position, null, color, rotate, Vector2.Zero, scale, SpriteEffects.None, 1.0f);
         }
     }
 }
