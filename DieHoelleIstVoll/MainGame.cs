@@ -44,6 +44,12 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("devil", Content.Load<Texture2D>("devil"));
             Global.Textures.Add("soul", Content.Load<Texture2D>("soul"));
             Global.Textures.Add("background", Content.Load<Texture2D>("background"));
+            Global.Textures.Add("soulicon", Content.Load<Texture2D>("soulicon"));
+            Global.Textures.Add("soulicongrey", Content.Load<Texture2D>("souliconGrau"));
+            Global.Textures.Add("heiligenschein", Content.Load<Texture2D>("heiligenschein"));
+            Global.Textures.Add("heiligenscheingrey", Content.Load<Texture2D>("heiligenscheinGrau"));
+            Global.Textures.Add("dreizack", Content.Load<Texture2D>("dreizack"));
+            Global.Textures.Add("dreizackgrey", Content.Load<Texture2D>("dreizackGrau"));
 
             screen = new GameScreen();
         }

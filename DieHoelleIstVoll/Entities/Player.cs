@@ -8,16 +8,16 @@ namespace DieHoelleIstVoll
     abstract class Player : Entity
     {
         protected const float SPEED = 300;
-        protected const int MAX_SOUL = 5;
-        protected const float MAX_HP = 5;
+        public const int MAX_SOUL = 5;
+        public const float MAX_HP = 5;
 
         protected bool triggered = false;
         protected Keys keyLeft;
         protected Keys keyRight;
         protected Keys keyThrow;
         protected int direction=Soul.DOWN;
-        protected int soulCount = 3;
-        protected int hp = 5;
+        public int soulCount = 3;
+        public int hp = 5;
 
         public Player(Screen screen, Texture2D texture, Vector2 position,Keys keyLeft,Keys keyRight,Keys keyThrow)
             : base(screen, texture, position, Color.White, 1.0f)
