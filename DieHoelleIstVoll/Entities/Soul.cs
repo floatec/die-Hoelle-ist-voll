@@ -53,9 +53,12 @@ namespace DieHoelleIstVoll
             if (isEvil && this.position.Y + this.texture.Height < 0)
             {
                 Hit(screen.Petrus);
+                screen.Souls.Add(new Soul(screen, new Vector2(Global.rand.Next(0, Global.Width),  Global.Height /2), Global.rand.Next(0, 2) == 0));
+        
             }
             else if (!isEvil && this.position.Y > Global.Height)
             {
+                
                 Hit(screen.Devil);
             }
         }
