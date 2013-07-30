@@ -11,7 +11,9 @@ namespace DieHoelleIstVoll
 
     class Soul : Entity
     {
-        public const float SPEED = 200.0f;
+        public const float SPEED = 300;
+
+        private SoulEffect effect;
         private bool isEvil;
 
         public Soul(GameScreen screen, Vector2 position, bool isEvil)
@@ -37,27 +39,45 @@ namespace DieHoelleIstVoll
                 this.position.Y += SPEED * dt;
             }
 
-            //Delete
-            if (this.position.Y + this.texture.Height < 0 || this.position.Y > Global.Height)
-            {
-                this.IsDestroying = true;
-            }
-
-            //Collision
+            //Collision with player
             if (isEvil && this.Rectangle.Intersects(screen.Petrus.Rectangle))
             {
-                Collide(screen.Petrus);
+                Catch(screen.Petrus);
             }
             else if (!isEvil && this.Rectangle.Intersects(screen.Devil.Rectangle))
             {
-                Collide(screen.Devil);
+                Catch(screen.Devil);
+            }
+
+            //Collision with screen
+            if (isEvil && this.position.Y + this.texture.Height < 0)
+            {
+                Hit(screen.Petrus);
+            }
+            else if (!isEvil && this.position.Y > Global.Height)
+            {
+                Hit(screen.Devil);
             }
         }
 
-        protected void Collide(Player player)
+        protected void Catch(Player player)
+        {
+            if (player.SoulCount < Player.MAX_SOUL)
+            {
+                player.SoulCount++;
+            }
+            else
+            {
+                Hit(player);
+            }
+
+            this.IsDestroying = true;
+        }
+
+        protected void Hit(Player player)
         {
             player.Hp--;
             this.IsDestroying = true;
-        }      
+        }
     }
 }

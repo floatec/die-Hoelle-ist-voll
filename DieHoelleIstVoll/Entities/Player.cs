@@ -7,7 +7,7 @@ namespace DieHoelleIstVoll
 {
     class Player : Entity
     {
-        protected const float SPEED = 300;
+        protected const float SPEED = 500;
         public const int MAX_SOUL = 5;
         public const float MAX_HP = 5;
 

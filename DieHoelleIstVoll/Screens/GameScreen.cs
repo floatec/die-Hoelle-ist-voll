@@ -18,8 +18,8 @@ namespace DieHoelleIstVoll
             background = Global.Textures["background"];
             
 
-            Petrus = new Player(this, new Vector2(0, 0), false);
-            Devil = new Player(this, new Vector2(0, 550), true);
+            Petrus = new Player(this, new Vector2(300, 40), false);
+            Devil = new Player(this, new Vector2(300, 510), true);
             Souls = new EntityManager();
         }
 
