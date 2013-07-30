@@ -15,17 +15,29 @@ namespace DieHoelleIstVoll
 
         private SoulEffect effect;
         private bool isEvil;
+        private bool isNew=false;
 
         public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
             this.isEvil = isEvil;
             this.color = Color.Blue;
-            if (isEvil)
+            if (this.isEvil)
             {
                 this.color = Color.Magenta;
                 this.rotation = MathHelper.Pi;
             }
+            
+        }
+        public Soul(GameScreen screen, Vector2 position, bool isEvil,bool isNew)
+            : this(screen,position,isEvil)
+        {
+            this.isNew = isNew;
+            if (this.isNew)
+            {
+                this.color = Color.Yellow;
+            }
+            
         }
 
         public override void Update(float dt)
@@ -53,15 +65,25 @@ namespace DieHoelleIstVoll
             //Collision with screen
             if (isEvil && this.position.Y + this.texture.Height < 0)
             {
-                Hit(screen.Petrus);
-                screen.Souls.Add(new Soul(screen, new Vector2(Global.rand.Next(0, Global.Width-Global.Textures["soul"].Width),  Global.Height /2), Global.rand.Next(0, 2) == 0));
-        
+                if (!this.isNew)
+                {
+                    Hit(screen.Petrus);
+                }
+                this.IsDestroying = true;
+                NewSoul();
             }
             else if (!isEvil && this.position.Y > Global.Height)
             {
-                
-                Hit(screen.Devil);
+                 if(!this.isNew){
+                 Hit(screen.Devil);
+                }
+                this.IsDestroying = true;
+                NewSoul();
             }
+        }
+        protected void NewSoul()
+        {
+            screen.Souls.Add(new Soul(screen, new Vector2(Global.rand.Next(0, Global.Width - Global.Textures["soul"].Width), Global.Height / 2), Global.rand.Next(0, 2) == 0, true));
         }
 
         protected void Catch(Player player)
@@ -72,6 +94,7 @@ namespace DieHoelleIstVoll
             }
             else
             {
+                NewSoul();
                 Hit(player);
             }
 
