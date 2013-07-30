@@ -95,7 +95,10 @@ namespace DieHoelleIstVoll
             else
             {
                 NewSoul();
-                Hit(player);
+                if (!this.isNew)
+                {
+                    Hit(player);
+                }
             }
 
             this.IsDestroying = true;
