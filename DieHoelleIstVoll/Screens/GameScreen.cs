@@ -11,6 +11,7 @@ namespace DieHoelleIstVoll
 
         Player petrus;
         Player devil;
+        float gametime = 0;
 
         public EntityManager souls;
 
@@ -26,6 +27,7 @@ namespace DieHoelleIstVoll
 
         public override void Update(float dt)
         {
+            gametime += dt;
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 int dir = Global.rand.Next(0, 2) == 0 ? 1 : -1;
@@ -41,12 +43,14 @@ namespace DieHoelleIstVoll
         public override void Draw()
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-
+            
             petrus.Draw();
             devil.Draw();
             souls.Draw();
             drawInterface();
-
+            float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));
+            spriteBatch.Draw(Global.Textures["howto"], Vector2.Zero, new Color(grey,grey,grey,grey));
+            
         }
 
         private void drawInterface()
