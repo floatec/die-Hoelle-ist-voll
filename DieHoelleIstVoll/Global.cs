@@ -9,6 +9,7 @@ namespace DieHoelleIstVoll
     {
         public static MainGame Game;
         public static SpriteBatch SpriteBatch;
+        public static Random rand=new Random();
 
         public const int Width = 800;
         public const int Height = 600;
