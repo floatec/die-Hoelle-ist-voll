@@ -20,9 +20,10 @@ namespace DieHoelleIstVoll
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
             this.isEvil = isEvil;
-
+            this.color = Color.Blue;
             if (isEvil)
             {
+                this.color = Color.Magenta;
                 this.rotation = MathHelper.Pi;
             }
         }
@@ -53,7 +54,7 @@ namespace DieHoelleIstVoll
             if (isEvil && this.position.Y + this.texture.Height < 0)
             {
                 Hit(screen.Petrus);
-                screen.Souls.Add(new Soul(screen, new Vector2(Global.rand.Next(0, Global.Width),  Global.Height /2), Global.rand.Next(0, 2) == 0));
+                screen.Souls.Add(new Soul(screen, new Vector2(Global.rand.Next(0, Global.Width-Global.Textures["soul"].Width),  Global.Height /2), Global.rand.Next(0, 2) == 0));
         
             }
             else if (!isEvil && this.position.Y > Global.Height)
