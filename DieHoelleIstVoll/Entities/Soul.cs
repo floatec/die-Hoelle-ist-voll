@@ -4,20 +4,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
+    public enum SoulEffect
+    {
+        None
+    }
+
     class Soul : Entity
     {
-        public const int UP = -1;
-        public const int DOWN = 1;
-        public const float SPEED = 200.0f;   
+        public const float SPEED = 200.0f;
+        private bool isEvil;
 
-        private int direction;
-
-        public Soul(Screen screen, Vector2 position, int direction)
+        public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
-            this.direction = direction;
+            this.isEvil = isEvil;
 
-            if (direction == UP)
+            if (isEvil)
             {
                 this.rotation = MathHelper.Pi;
             }
@@ -25,13 +27,37 @@ namespace DieHoelleIstVoll
 
         public override void Update(float dt)
         {
-            this.position.Y += SPEED * direction * dt;
+            //Movement
+            if (isEvil)
+            {
+                this.position.Y -= SPEED * dt;
+            }
+            else
+            {
+                this.position.Y += SPEED * dt;
+            }
 
+            //Delete
             if (this.position.Y + this.texture.Height < 0 || this.position.Y > Global.Height)
             {
                 this.IsDestroying = true;
             }
+
+            //Collision
+            if (isEvil && this.Rectangle.Intersects(screen.Petrus.Rectangle))
+            {
+                Collide(screen.Petrus);
+            }
+            else if (!isEvil && this.Rectangle.Intersects(screen.Devil.Rectangle))
+            {
+                Collide(screen.Devil);
+            }
         }
-        
+
+        protected void Collide(Player player)
+        {
+            player.Hp--;
+            this.IsDestroying = true;
+        }      
     }
 }

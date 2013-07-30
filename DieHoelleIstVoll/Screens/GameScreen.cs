@@ -7,87 +7,78 @@ namespace DieHoelleIstVoll
 {
     class GameScreen : Screen
     {
-        Texture2D background;
+        public Player Petrus;
+        public Player Devil;   
+        public EntityManager Souls;
 
-        Player petrus;
-        Player devil;
-
-        public EntityManager souls;
+        private Texture2D background;
 
         public GameScreen()
         {
             background = Global.Textures["background"];
             
 
-            petrus = new Petrus(this, new Vector2(0, 0));
-            devil = new Devil(this, new Vector2(0, 550));
-            souls = new EntityManager();
+            Petrus = new Player(this, new Vector2(0, 0), false);
+            Devil = new Player(this, new Vector2(0, 550), true);
+            Souls = new EntityManager();
         }
 
         public override void Update(float dt)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                int dir = Global.rand.Next(0, 2) == 0 ? 1 : -1;
-                souls.Add(new Soul(this, new Vector2(Global.rand.Next(0, Global.Height), dir == 1 ? 1 : Global.Height - 50), dir));
-            }
-
-            petrus.Update(dt);
-            devil.Update(dt);
-            souls.Update(dt);
-           
+            Petrus.Update(dt);
+            Devil.Update(dt);
+            Souls.Update(dt);  
         }
 
         public override void Draw()
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
-            petrus.Draw();
-            devil.Draw();
-            souls.Draw();
+            Petrus.Draw();
+            Devil.Draw();
+            Souls.Draw();
             drawInterface();
-
         }
 
         private void drawInterface()
         {
             //souls
             //petrus
-            for (int i = 0; i < petrus.soulCount; i++)
+            for (int i = 0; i < Petrus.SoulCount; i++)
             {
                 spriteBatch.Draw(Global.Textures["soulicon"], new Vector2(Global.Width - Global.Textures["soulicon"].Width*(i+1), 0), Color.White);
             }
-            for (int i = petrus.soulCount;i<Player.MAX_SOUL ; i++)
+            for (int i = Petrus.SoulCount;i<Player.MAX_SOUL ; i++)
             {
                 spriteBatch.Draw(Global.Textures["soulicongrey"], new Vector2(Global.Width - Global.Textures["soulicon"].Width * (i + 1), 0), Color.White);
             }
             //devil
-            for (int i = 0; i < devil.soulCount; i++)
+            for (int i = 0; i < Devil.SoulCount; i++)
             {
                 spriteBatch.Draw(Global.Textures["soulicon"], new Vector2(Global.Width - Global.Textures["soulicon"].Width * (i + 1), Global.Height - Global.Textures["soulicon"].Height), Color.White);
             }
-            for (int i = devil.soulCount; i < Player.MAX_SOUL; i++)
+            for (int i = Devil.SoulCount; i < Player.MAX_SOUL; i++)
             {
                 spriteBatch.Draw(Global.Textures["soulicongrey"], new Vector2(Global.Width - Global.Textures["soulicon"].Width * (i + 1), Global.Height - Global.Textures["soulicon"].Height), Color.White);
             }
             //HP
             //petrus
-            for (int i = 0; i < petrus.hp; i++)
+            for (int i = 0; i < Petrus.Hp; i++)
             {
                 spriteBatch.Draw(Global.Textures["heiligenschein"], new Vector2( Global.Textures["heiligenschein"].Width * (i ), 0), Color.White);
             }
-            for (int i = petrus.hp; i < Player.MAX_HP; i++)
+            for (int i = Petrus.Hp; i < Player.MAX_HP; i++)
             {
                 spriteBatch.Draw(Global.Textures["heiligenscheingrey"], new Vector2(Global.Textures["heiligenscheingrey"].Width * (i ), 0), Color.White);
             }
             //devil
-            for (int i = 0; i < devil.hp; i++)
+            for (int i = 0; i < Devil.Hp; i++)
             {
                 spriteBatch.Draw(Global.Textures["dreizack"], new Vector2( Global.Textures["dreizack"].Width * (i ), Global.Height - Global.Textures["dreizack"].Height), Color.White);
             }
-            for (int i = devil.hp; i < Player.MAX_HP; i++)
+            for (int i = Devil.Hp; i < Player.MAX_HP; i++)
             {
-                spriteBatch.Draw(Global.Textures["dreizackngrey"], new Vector2( Global.Textures["dreizackicon"].Width * (i ), Global.Height - Global.Textures["soulicon"].Height), Color.White);
+                spriteBatch.Draw(Global.Textures["dreizackgrey"], new Vector2( Global.Textures["dreizack"].Width * (i ), Global.Height - Global.Textures["soulicon"].Height), Color.White);
             }
         }
     }
