@@ -4,20 +4,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
+    public enum SoulEffect
+    {
+        None
+    }
+
     class Soul : Entity
     {
-        public const int UP = -1;
-        public const int DOWN = 1;
-        public const float SPEED = 200.0f;   
+        public const float SPEED = 300;
 
-        private int direction;
+        private SoulEffect effect;
+        private bool isEvil;
 
-        public Soul(Screen screen, Vector2 position, int direction)
+        public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
-            this.direction = direction;
+            this.isEvil = isEvil;
 
-            if (direction == UP)
+            if (isEvil)
             {
                 this.rotation = MathHelper.Pi;
             }
@@ -25,13 +29,55 @@ namespace DieHoelleIstVoll
 
         public override void Update(float dt)
         {
-            this.position.Y += SPEED * direction * dt;
-
-            if (this.position.Y + this.texture.Height < 0 || this.position.Y > Global.Height)
+            //Movement
+            if (isEvil)
             {
-                this.IsDestroying = true;
+                this.position.Y -= SPEED * dt;
+            }
+            else
+            {
+                this.position.Y += SPEED * dt;
+            }
+
+            //Collision with player
+            if (isEvil && this.Rectangle.Intersects(screen.Petrus.Rectangle))
+            {
+                Catch(screen.Petrus);
+            }
+            else if (!isEvil && this.Rectangle.Intersects(screen.Devil.Rectangle))
+            {
+                Catch(screen.Devil);
+            }
+
+            //Collision with screen
+            if (isEvil && this.position.Y + this.texture.Height < 0)
+            {
+                Hit(screen.Petrus);
+            }
+            else if (!isEvil && this.position.Y > Global.Height)
+            {
+                Hit(screen.Devil);
             }
         }
-        
+
+        protected void Catch(Player player)
+        {
+            if (player.SoulCount < Player.MAX_SOUL)
+            {
+                player.SoulCount++;
+            }
+            else
+            {
+                Hit(player);
+            }
+
+            this.IsDestroying = true;
+        }
+
+        protected void Hit(Player player)
+        {
+            player.Hp--;
+            this.IsDestroying = true;
+        }
     }
 }
