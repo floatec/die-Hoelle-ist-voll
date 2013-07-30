@@ -7,7 +7,7 @@ namespace DieHoelleIstVoll
 {
     abstract class Player : Entity
     {
-        protected const float SPEED = 100; 
+        protected const float SPEED = 300; 
 
         public Player(Texture2D texture, Vector2 position)
             : base(texture, position, Color.White, 1.0f)

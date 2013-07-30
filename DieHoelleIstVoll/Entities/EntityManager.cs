@@ -16,7 +16,7 @@ namespace DieHoelleIstVoll
             newEntities = new List<Entity>();
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(float dt)
         {
             //Neue hinzufügen
             foreach (Entity e in newEntities)
@@ -28,7 +28,7 @@ namespace DieHoelleIstVoll
             //Alle durchlaufen
             foreach (Entity e in entities)
             {
-                e.Update(gameTime);
+                e.Update(dt);
             }
 
             //Erst danach unnötige (rückwärts) entfernen
@@ -39,12 +39,12 @@ namespace DieHoelleIstVoll
             }
         }
 
-        public void Draw(GameTime gameTime)
+        public void Draw()
         {
             foreach (Entity e in entities)
             {
                 if (!e.IsDestroying)
-                    e.Draw(gameTime);
+                    e.Draw();
             }
         }
 

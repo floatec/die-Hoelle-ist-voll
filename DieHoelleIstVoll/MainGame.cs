@@ -50,7 +50,9 @@ namespace DieHoelleIstVoll
 
         protected override void Update(GameTime gameTime)
         {
-            screen.Update(gameTime);
+            float dt = gameTime.ElapsedGameTime.Milliseconds / 1000.0f;
+
+            screen.Update(dt);
 
             base.Update(gameTime);
         }
@@ -60,7 +62,7 @@ namespace DieHoelleIstVoll
             GraphicsDevice.Clear(Color.Blue);
 
             spriteBatch.Begin();
-            screen.Draw(gameTime);
+            screen.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

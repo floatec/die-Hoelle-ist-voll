@@ -19,30 +19,31 @@ namespace DieHoelleIstVoll
             background = Global.Textures["background"];
 
             petrus = new Petrus(new Vector2(300, 20));
-            devil = new Devil(new Vector2(300, 540));
+            devil = new Devil(new Vector2(300, 580));
             souls = new EntityManager();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 int dir = Global.rand.Next(0, 2) == 0 ? 1 : -1;
                 souls.Add(new Soul(new Vector2(Global.rand.Next(0, Global.Height), dir == 1 ? 1 : Global.Height - 50), dir));
             }
-            petrus.Update(gameTime);
-            devil.Update(gameTime);
-            souls.Update(gameTime);
+
+            petrus.Update(dt);
+            devil.Update(dt);
+            souls.Update(dt);
            
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Draw()
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
 
-            petrus.Draw(gameTime);
-            devil.Draw(gameTime);
-            souls.Draw(gameTime);
+            petrus.Draw();
+            devil.Draw();
+            souls.Draw();
         }
     }
 }

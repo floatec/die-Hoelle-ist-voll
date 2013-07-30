@@ -6,26 +6,30 @@ namespace DieHoelleIstVoll
 {
     class Soul : Entity
     {
-        public const int DOWN = 1;
         public const int UP = -1;
-        private int Direction;
-        public const float SPEED = 0.5f;   
+        public const int DOWN = 1;
+        public const float SPEED = 200.0f;   
+
+        private int direction;
+
         public Soul(Vector2 position, int direction)
             : base(Global.Textures["soul"], position, Color.White, 1.0f)
         {
-            this.Direction = direction;
+            this.direction = direction;
+
             if (direction == UP)
             {
-                base.rotate = MathHelper.Pi;
+                this.rotation = MathHelper.Pi;
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
-            base.position.Y += SPEED*Direction;
-            if (base.position.Y < 0 || base.position.Y > Global.Height)
+            this.position.Y += SPEED * direction * dt;
+
+            if (this.position.Y + this.texture.Height < 0 || this.position.Y > Global.Height)
             {
-                base.IsDestroying = true;
+                this.IsDestroying = true;
             }
         }
         

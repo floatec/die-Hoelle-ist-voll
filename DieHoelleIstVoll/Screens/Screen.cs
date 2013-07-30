@@ -20,8 +20,8 @@ namespace DieHoelleIstVoll
 
         }
 
-        public abstract void Update(GameTime gameTime);
+        public abstract void Update(float dt);
 
-        public abstract void Draw(GameTime gameTime);
+        public abstract void Draw();
     }
 }

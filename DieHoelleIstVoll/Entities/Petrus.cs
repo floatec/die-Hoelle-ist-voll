@@ -12,17 +12,17 @@ namespace DieHoelleIstVoll
         {
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float dt)
         {
             KeyboardState keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(Keys.A))
             {
-                Move(-SPEED);
+                Move(-SPEED * dt);
             }
             else if (keyState.IsKeyDown(Keys.D))
             {
-                Move(SPEED);
+                Move(SPEED * dt);
             }
         }
     }
