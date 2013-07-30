@@ -8,6 +8,8 @@ namespace DieHoelleIstVoll
     abstract class Player : Entity
     {
         protected const float SPEED = 300;
+        protected const int MAX_SOUL = 5;
+        protected const float MAX_HP = 5;
 
         protected bool triggered = false;
         protected Keys keyLeft;
@@ -49,7 +51,11 @@ namespace DieHoelleIstVoll
             if (!triggered && keyState.IsKeyDown(keyThrow))
             {
                 triggered = true;
-                SpawnSoul(direction);
+                if (soulCount > 0)
+                {
+                    soulCount--;
+                    SpawnSoul(direction);
+                }
             }
             if (keyState.IsKeyUp(keyThrow))
             {
