@@ -12,14 +12,14 @@ namespace DieHoelleIstVoll
         Player petrus;
         Player devil;
 
-        EntityManager souls;
+        public EntityManager souls;
 
         public GameScreen()
         {
             background = Global.Textures["background"];
 
-            petrus = new Petrus(new Vector2(0, 0));
-            devil = new Devil(new Vector2(0, 550));
+            petrus = new Petrus(this, new Vector2(0, 0));
+            devil = new Devil(this, new Vector2(0, 550));
             souls = new EntityManager();
         }
 
@@ -28,7 +28,7 @@ namespace DieHoelleIstVoll
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 int dir = Global.rand.Next(0, 2) == 0 ? 1 : -1;
-                souls.Add(new Soul(new Vector2(Global.rand.Next(0, Global.Height), dir == 1 ? 1 : Global.Height - 50), dir));
+                souls.Add(new Soul(this, new Vector2(Global.rand.Next(0, Global.Height), dir == 1 ? 1 : Global.Height - 50), dir));
             }
 
             petrus.Update(dt);

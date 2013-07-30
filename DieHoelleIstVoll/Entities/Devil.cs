@@ -7,8 +7,8 @@ namespace DieHoelleIstVoll
 {
     class Devil : Player
     {
-        public Devil(Vector2 position)
-            : base(Global.Textures["devil"], position)
+        public Devil(Screen screen, Vector2 position)
+            : base(screen, Global.Textures["devil"], position)
         {
         }
 

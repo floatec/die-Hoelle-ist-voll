@@ -9,6 +9,8 @@ namespace DieHoelleIstVoll
         protected static MainGame game;
         protected static SpriteBatch spriteBatch;
 
+        protected Screen screen;
+
         protected Texture2D texture;
         protected Vector2 position;
         protected Color color;
@@ -55,8 +57,10 @@ namespace DieHoelleIstVoll
             Entity.spriteBatch = Global.SpriteBatch;
         }
 
-        public Entity(Texture2D texture, Vector2 position, Color color, float scale)
+        public Entity(Screen screen, Texture2D texture, Vector2 position, Color color, float scale)
         {
+            this.screen = screen;
+
             this.texture = texture;
             this.color = color;
             this.scale = scale;

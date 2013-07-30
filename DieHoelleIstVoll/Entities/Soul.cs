@@ -12,8 +12,8 @@ namespace DieHoelleIstVoll
 
         private int direction;
 
-        public Soul(Vector2 position, int direction)
-            : base(Global.Textures["soul"], position, Color.White, 1.0f)
+        public Soul(Screen screen, Vector2 position, int direction)
+            : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
             this.direction = direction;
 

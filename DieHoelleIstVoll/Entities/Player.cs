@@ -9,8 +9,8 @@ namespace DieHoelleIstVoll
     {
         protected const float SPEED = 300; 
 
-        public Player(Texture2D texture, Vector2 position)
-            : base(texture, position, Color.White, 1.0f)
+        public Player(Screen screen, Texture2D texture, Vector2 position)
+            : base(screen, texture, position, Color.White, 1.0f)
         {
         }
 
@@ -21,6 +21,11 @@ namespace DieHoelleIstVoll
             {
                 this.position.X += amount;
             }
+        }
+
+        protected void SpawnSoul(int direction){
+
+            ((GameScreen)screen).souls.Add(new Soul(screen, new Vector2(position.X, position.Y), direction));
         }
     }
 }

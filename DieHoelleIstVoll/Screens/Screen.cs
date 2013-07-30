@@ -8,7 +8,7 @@ namespace DieHoelleIstVoll
     {
         protected static MainGame game;
         protected static SpriteBatch spriteBatch;
-
+        
         public static void Initialize()
         {
             Screen.game = Global.Game;

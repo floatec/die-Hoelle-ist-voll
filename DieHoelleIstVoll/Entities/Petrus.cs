@@ -7,8 +7,8 @@ namespace DieHoelleIstVoll
 {
     class Petrus : Player
     {
-        public Petrus(Vector2 position)
-            : base(Global.Textures["petrus"], position)
+        public Petrus(Screen screen, Vector2 position)
+            : base(screen, Global.Textures["petrus"], position)
         {
         }
 
@@ -23,6 +23,11 @@ namespace DieHoelleIstVoll
             else if (keyState.IsKeyDown(Keys.D))
             {
                 Move(SPEED * dt);
+            }
+            
+            if (keyState.IsKeyDown(Keys.S))
+            {
+                SpawnSoul(Soul.DOWN);
             }
         }
     }
