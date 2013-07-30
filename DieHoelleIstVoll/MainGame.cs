@@ -50,6 +50,8 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("heiligenscheingrey", Content.Load<Texture2D>("heiligenscheinGrau"));
             Global.Textures.Add("dreizack", Content.Load<Texture2D>("dreizack"));
             Global.Textures.Add("dreizackgrey", Content.Load<Texture2D>("dreizackGrau"));
+            Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
+
 
             screen = new GameScreen();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace DieHoelleIstVoll
 {
@@ -16,5 +17,6 @@ namespace DieHoelleIstVoll
 
         public static Dictionary<string, Texture2D> Textures =
             new Dictionary<string, Texture2D>();
+        public static Dictionary<string, SoundEffect> Sounds = new Dictionary<string, SoundEffect>();
     }
 }

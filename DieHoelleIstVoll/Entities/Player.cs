@@ -64,7 +64,7 @@ namespace DieHoelleIstVoll
         }
 
         protected void SpawnSoul(int direction){
-
+            Global.Sounds["throw"].Play();
             ((GameScreen)screen).souls.Add(new Soul(screen, new Vector2(position.X, position.Y), direction));
         }
     }
