@@ -40,7 +40,8 @@ namespace DieHoelleIstVoll
             Entity.Initialize();
             Screen.Initialize();
 
-            Global.Textures.Add("player", Content.Load<Texture2D>("petrus"));
+            Global.Textures.Add("petrus", Content.Load<Texture2D>("petrus"));
+            Global.Textures.Add("devil", Content.Load<Texture2D>("devil"));
             Global.Textures.Add("soul", Content.Load<Texture2D>("soul"));
             Global.Textures.Add("background", Content.Load<Texture2D>("background"));
 

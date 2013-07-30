@@ -59,6 +59,7 @@ namespace DieHoelleIstVoll
             this.color = color;
             this.scale = scale;
             this.position = position;
+            this.IsDestroying = false;
         }
 
         public abstract void Update(GameTime gameTime);

@@ -1,20 +1,26 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
-    class Player : Entity
+    abstract class Player : Entity
     {
-        public Player(Vector2 position)
-            : base(Global.Textures["player"], position, Color.White, 1.0f)
+        protected const float SPEED = 100; 
+
+        public Player(Texture2D texture, Vector2 position)
+            : base(texture, position, Color.White, 1.0f)
         {
-            
         }
 
-        public override void Update(GameTime gameTime)
+        protected void Move(float amount)
         {
-            //TODO
+            if ((amount < 0 && this.position.X > 0) 
+                || (amount > 0 && this.position.X + this.texture.Width < Global.Width))
+            {
+                this.position.X += amount;
+            }
         }
     }
 }

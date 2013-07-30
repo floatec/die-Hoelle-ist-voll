@@ -109,8 +109,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Devil.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\EntityManager.cs" />
+    <Compile Include="Entities\Petrus.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Soul.cs" />
     <Compile Include="Global.cs" />
