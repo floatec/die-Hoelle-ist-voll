@@ -7,11 +7,22 @@ namespace DieHoelleIstVoll
 {
     abstract class Player : Entity
     {
-        protected const float SPEED = 300; 
+        protected const float SPEED = 300;
 
-        public Player(Screen screen, Texture2D texture, Vector2 position)
+        protected bool triggered = false;
+        protected Keys keyLeft;
+        protected Keys keyRight;
+        protected Keys keyThrow;
+        protected int direction=Soul.DOWN;
+        protected int soulCount = 3;
+        protected int hp = 5;
+
+        public Player(Screen screen, Texture2D texture, Vector2 position,Keys keyLeft,Keys keyRight,Keys keyThrow)
             : base(screen, texture, position, Color.White, 1.0f)
         {
+            this.keyLeft = keyLeft;
+            this.keyRight = keyRight;
+            this.keyThrow = keyThrow;
         }
 
         protected void Move(float amount)
@@ -20,6 +31,29 @@ namespace DieHoelleIstVoll
                 || (amount > 0 && this.position.X + this.texture.Width < Global.Width))
             {
                 this.position.X += amount;
+            }
+        }
+        protected void update(float dt)
+        {
+            KeyboardState keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(keyLeft))
+            {
+                Move(-SPEED * dt);
+            }
+            else if (keyState.IsKeyDown(keyRight))
+            {
+                Move(SPEED * dt);
+            }
+
+            if (!triggered && keyState.IsKeyDown(keyThrow))
+            {
+                triggered = true;
+                SpawnSoul(direction);
+            }
+            if (keyState.IsKeyUp(keyThrow))
+            {
+                triggered = false;
             }
         }
 

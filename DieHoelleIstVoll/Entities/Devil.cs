@@ -8,22 +8,14 @@ namespace DieHoelleIstVoll
     class Devil : Player
     {
         public Devil(Screen screen, Vector2 position)
-            : base(screen, Global.Textures["devil"], position)
+            : base(screen, Global.Textures["devil"], position,Keys.Left,Keys.Right,Keys.Up)
         {
+            direction = Soul.UP;
         }
 
         public override void Update(float dt)
         {
-            KeyboardState keyState = Keyboard.GetState();
-
-            if (keyState.IsKeyDown(Keys.Left))
-            {
-                Move(-SPEED * dt);
-            }
-            else if (keyState.IsKeyDown(Keys.Right))
-            {
-                Move(SPEED * dt);
-            }
+            base.update(dt);
         }
     }
 }
