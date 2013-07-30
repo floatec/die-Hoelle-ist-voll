@@ -1,0 +1,13 @@
+*.cachefile
+
+*.exe
+
+*.xnb
+
+*.pdb
+
+*.cache
+
+/DieHoelleIstVoll/obj/x86/Debug
+
+/DieHoelleIstVollContent/obj/x86/Debug
