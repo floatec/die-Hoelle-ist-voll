@@ -70,7 +70,7 @@ namespace DieHoelleIstVoll
 
         public virtual void Draw()
         {
-            spriteBatch.Draw(texture, position, null, color, rotation, origin, scale, SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(texture, position + origin, null, color, rotation, origin, scale, SpriteEffects.None, 1.0f);
         }
     }
 }
