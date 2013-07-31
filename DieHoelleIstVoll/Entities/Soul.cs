@@ -28,7 +28,7 @@ namespace DieHoelleIstVoll
                 }
             }
         }
-        private bool isNew = false;
+        public bool IsNew = false;
 
         public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
@@ -39,9 +39,9 @@ namespace DieHoelleIstVoll
         public Soul(GameScreen screen, Vector2 position, bool isEvil, bool isNew)
             : this(screen, position, isEvil)
         {
-            this.isNew = isNew;
+            this.IsNew = isNew;
 
-            if (this.isNew)
+            if (this.IsNew)
             {
                 this.color = Color.Yellow;
             }
@@ -100,7 +100,7 @@ namespace DieHoelleIstVoll
 
         protected void Hit(Player player)
         {
-            if (!this.isNew)
+            if (!this.IsNew)
             {
                 player.Hp--;
             }

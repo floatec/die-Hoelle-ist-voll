@@ -14,7 +14,10 @@ namespace DieHoelleIstVoll
 
     class Powerup : Entity
     {
+        public const float SPEED = 300;
+
         private PowerupType type;
+        private bool isActive = false;
 
         private bool isEvil;
         public bool IsEvil
@@ -26,7 +29,7 @@ namespace DieHoelleIstVoll
 
                 if (isEvil)
                 {
-                    this.color = Color.Magenta;
+                    this.color = Color.Red;
                     this.rotation = MathHelper.Pi;                  
                 }
                 else
@@ -61,11 +64,33 @@ namespace DieHoelleIstVoll
         {
             List<Soul> souls = this.screen.Souls.Entities;
 
-            foreach (Soul s in souls)
+            if (isActive)
             {
-                if (this.Rectangle.Intersects(s.Rectangle))
+                if (!isEvil)
                 {
-                    //TODO
+                    this.position.Y -= SPEED * dt;
+                }
+                else
+                {
+                    this.position.Y += SPEED * dt;
+                }
+            }
+            else
+            {
+                foreach (Soul s in souls)
+                {
+                    if (this.Rectangle.Intersects(s.Rectangle) && !s.IsNew)
+                    {
+                        if (this.isEvil == s.IsEvil)
+                        {
+                            this.isActive = true;
+                        }
+                        else
+                        {
+                            //Reflect
+                            s.IsEvil = !s.IsEvil;
+                        }
+                    }
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace DieHoelleIstVoll
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Screen screen;
+        public Screen Screen;
 
         public MainGame()
         {
@@ -58,14 +58,14 @@ namespace DieHoelleIstVoll
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
-            screen = new GameScreen();
+            Screen = new GameScreen();
         }
 
         protected override void Update(GameTime gameTime)
         {
             float dt = gameTime.ElapsedGameTime.Milliseconds / 1000.0f;
 
-            screen.Update(dt);
+            Screen.Update(dt);
 
             base.Update(gameTime);
         }
@@ -75,7 +75,7 @@ namespace DieHoelleIstVoll
             GraphicsDevice.Clear(Color.Blue);
 
             spriteBatch.Begin();
-            screen.Draw();
+            Screen.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -40,10 +40,22 @@ namespace DieHoelleIstVoll
             }
 
             Souls.Update(dt);
+            Powerups.Update(dt);
 
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
                 GameState = GAMEOVER;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                Vector2 pos = new Vector2(Global.rand.Next(0, Global.Width), Global.Height / 2);
+                bool evil = Global.rand.Next(0, 2) == 0 ? false : true;
+
+                Array values = Enum.GetValues(typeof(PowerupType));
+                PowerupType type = (PowerupType)values.GetValue(Global.rand.Next(values.Length));
+
+                Powerups.Add(new Powerup(this, pos, evil, type));
             }
         }
 
@@ -54,6 +66,7 @@ namespace DieHoelleIstVoll
             Petrus.Draw();
             Devil.Draw();
             Souls.Draw();
+            Powerups.Draw();
             drawInterface();
 
             float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));
@@ -66,6 +79,9 @@ namespace DieHoelleIstVoll
             {
                 dif = Global.Fonts["count"].MeasureString("GAMEOVER");
                 spriteBatch.DrawString(Global.Fonts["count"], "GAMEOVER", new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), Color.White);
+                
+                //TODO remove
+                game.Screen = new GameScreen();
             }
         }
 

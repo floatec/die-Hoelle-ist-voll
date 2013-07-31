@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
-    abstract class Screen
+    public abstract class Screen
     {
         protected static MainGame game;
         protected static SpriteBatch spriteBatch;

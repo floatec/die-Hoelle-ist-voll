@@ -15,8 +15,7 @@ namespace DieHoelleIstVoll
         public const int Width = 800;
         public const int Height = 600;
 
-        public static Dictionary<string, Texture2D> Textures =
-            new Dictionary<string, Texture2D>();
+        public static Dictionary<string, Texture2D> Textures = new Dictionary<string, Texture2D>();
         public static Dictionary<string, SoundEffect> Sounds = new Dictionary<string, SoundEffect>();
         public static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
     }
