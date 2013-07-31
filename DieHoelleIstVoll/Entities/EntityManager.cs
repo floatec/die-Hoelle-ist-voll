@@ -5,28 +5,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
-    class EntityManager
+    class EntityManager<T> where T : Entity
     {
-        List<Entity> entities;
-        List<Entity> newEntities;
+        List<T> entities;
+        List<T> newEntities;
+
+        public List<T> Entities
+        {
+            get { return entities; }
+        }
 
         public EntityManager()
         {
-            entities = new List<Entity>();
-            newEntities = new List<Entity>();
+            entities = new List<T>();
+            newEntities = new List<T>();
         }
 
         public void Update(float dt)
         {
             //Neue hinzufügen
-            foreach (Entity e in newEntities)
+            foreach (T e in newEntities)
             {
                 entities.Add(e);
             }
             newEntities.Clear();
 
             //Alle durchlaufen
-            foreach (Entity e in entities)
+            foreach (T e in entities)
             {
                 e.Update(dt);
             }
@@ -41,16 +46,15 @@ namespace DieHoelleIstVoll
 
         public void Draw()
         {
-            foreach (Entity e in entities)
+            foreach (T e in entities)
             {
                 if (!e.IsDestroying)
                     e.Draw();
             }
         }
 
-        public void Add(Entity e)
+        public void Add(T e)
         {
-            e.EntityManager = this;
             newEntities.Add(e);
         }
 

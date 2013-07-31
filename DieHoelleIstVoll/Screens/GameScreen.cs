@@ -11,7 +11,8 @@ namespace DieHoelleIstVoll
         public const int GAMEOVER=1;
         public Player Petrus;
         public Player Devil;   
-        public EntityManager Souls;
+        public EntityManager<Soul> Souls;
+        public EntityManager<Powerup> Powerups;
 
         private Texture2D background;
         float gametime = 0;
@@ -24,18 +25,22 @@ namespace DieHoelleIstVoll
 
             Petrus = new Player(this, new Vector2(300, 40), false);
             Devil = new Player(this, new Vector2(300, 520), true);
-            Souls = new EntityManager();
+            Souls = new EntityManager<Soul>();
+            Powerups = new EntityManager<Powerup>();
         }
 
         public override void Update(float dt)
         {
             gametime += dt;
-            if (gametime >= 3&&GameState==ACTIVE)
+
+            if (gametime >= 3 && GameState == ACTIVE)
             {
                 Petrus.Update(dt);
                 Devil.Update(dt);
             }
+
             Souls.Update(dt);
+
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
                 GameState = GAMEOVER;
@@ -50,16 +55,17 @@ namespace DieHoelleIstVoll
             Devil.Draw();
             Souls.Draw();
             drawInterface();
+
             float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));
             spriteBatch.Draw(Global.Textures["howto"], Vector2.Zero, new Color(grey,grey,grey,grey));
-            string middle = (int)gametime < 3 ? (int)(4 - gametime)+"" : "go";
+            string middle = (int)gametime < 3 ? (int)(4 - gametime)+"" : "go";   
             Vector2 dif = Global.Fonts["count"].MeasureString(middle);
             spriteBatch.DrawString(Global.Fonts["count"], middle, new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), new Color(grey + 0.4f, grey + 0.4f, grey + 0.4f, grey + 0.4f));
+
             if (GameState == GAMEOVER)
             {
-               dif = Global.Fonts["count"].MeasureString("GAMEOVER");
+                dif = Global.Fonts["count"].MeasureString("GAMEOVER");
                 spriteBatch.DrawString(Global.Fonts["count"], "GAMEOVER", new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), Color.White);
-         
             }
         }
 

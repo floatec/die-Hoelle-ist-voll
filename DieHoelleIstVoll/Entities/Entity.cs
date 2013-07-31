@@ -18,12 +18,6 @@ namespace DieHoelleIstVoll
         protected float rotation = 0.0f;
         protected Vector2 origin;
 
-        public EntityManager EntityManager
-        {
-            get;
-            set;
-        }
-
         public bool IsDestroying
         {
             get;

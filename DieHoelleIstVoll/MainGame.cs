@@ -52,6 +52,9 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("dreizackgrey", Content.Load<Texture2D>("dreizackGrau"));
             Global.Textures.Add("howto", Content.Load<Texture2D>("howtooverley"));
             Global.Textures.Add("powerup", Content.Load<Texture2D>("powerup"));
+            Global.Textures.Add("powerupArea", Content.Load<Texture2D>("powerupArea"));
+            Global.Textures.Add("powerupFire", Content.Load<Texture2D>("powerupFire"));
+            Global.Textures.Add("powerupMove", Content.Load<Texture2D>("powerupMove"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 

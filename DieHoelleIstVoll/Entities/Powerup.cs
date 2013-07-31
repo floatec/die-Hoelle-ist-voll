@@ -1,14 +1,15 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace DieHoelleIstVoll
 {
     enum PowerupType
     {
-        Movement,
+        Area,
         Fire,
-        Area
+        Move
     }
 
     class Powerup : Entity
@@ -44,18 +45,29 @@ namespace DieHoelleIstVoll
 
             if (type == PowerupType.Area)
             {
+                this.texture = Global.Textures["powerupArea"];
             }
             else if (type == PowerupType.Fire)
             {
+                this.texture = Global.Textures["powerupFire"];
             }
-            else if (type == PowerupType.Movement)
+            else if (type == PowerupType.Move)
             {
+                this.texture = Global.Textures["powerupMove"];
             }
         }
 
         public override void Update(float dt)
         {
+            List<Soul> souls = this.screen.Souls.Entities;
 
+            foreach (Soul s in souls)
+            {
+                if (this.Rectangle.Intersects(s.Rectangle))
+                {
+                    //TODO
+                }
+            }
         }
     }
 }
