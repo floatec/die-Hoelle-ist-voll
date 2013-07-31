@@ -20,7 +20,7 @@ namespace DieHoelleIstVoll
             
 
             Petrus = new Player(this, new Vector2(300, 40), false);
-            Devil = new Player(this, new Vector2(300, 510), true);
+            Devil = new Player(this, new Vector2(300, 520), true);
             Souls = new EntityManager();
         }
 
