@@ -16,6 +16,7 @@ namespace DieHoelleIstVoll
 
         private Texture2D background;
         float gametime = 0;
+        float PowerupSpawmTime = 0;
         public int GameState = ACTIVE;
 
         public GameScreen()
@@ -31,6 +32,7 @@ namespace DieHoelleIstVoll
 
         public override void Update(float dt)
         {
+            KeyboardState keyState = Keyboard.GetState();
             gametime += dt;
 
             if (gametime >= 3 && GameState == ACTIVE)
@@ -45,11 +47,16 @@ namespace DieHoelleIstVoll
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
                 GameState = GAMEOVER;
+                if (keyState.IsKeyDown(Keys.Space))
+                {
+                    game.Screen = new GameScreen();
+                }
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            PowerupSpawmTime += dt;
+            if ((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>15)
             {
-                Vector2 pos = new Vector2(Global.rand.Next(0, Global.Width), Global.Height / 2);
+                PowerupSpawmTime = 0;
+                Vector2 pos = new Vector2(Global.rand.Next(100, Global.Width-100), Global.Height / 2);
                 bool evil = Global.rand.Next(0, 2) == 0 ? false : true;
 
                 Array values = Enum.GetValues(typeof(PowerupType));
@@ -79,9 +86,9 @@ namespace DieHoelleIstVoll
             {
                 dif = Global.Fonts["count"].MeasureString("GAMEOVER");
                 spriteBatch.DrawString(Global.Fonts["count"], "GAMEOVER", new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), Color.White);
-                
-                //TODO remove
-                game.Screen = new GameScreen();
+                dif = Global.Fonts["count"].MeasureString("[SPACE] to try it again");
+                spriteBatch.DrawString(Global.Fonts["count"], "[SPACE] to try it again", new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y+130) / 2), Color.White);
+
             }
         }
 
