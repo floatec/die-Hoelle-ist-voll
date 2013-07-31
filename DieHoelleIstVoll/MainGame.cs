@@ -52,7 +52,7 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("dreizackgrey", Content.Load<Texture2D>("dreizackGrau"));
             Global.Textures.Add("howto", Content.Load<Texture2D>("howtooverley"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
-
+            Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
             screen = new GameScreen();
         }
