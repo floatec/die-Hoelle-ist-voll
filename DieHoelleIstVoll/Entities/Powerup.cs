@@ -7,6 +7,7 @@ namespace DieHoelleIstVoll
 {
     enum PowerupType
     {
+        None,
         Area,
         Fire,
         Move
@@ -74,6 +75,15 @@ namespace DieHoelleIstVoll
                 {
                     this.position.Y += SPEED * dt;
                 }
+
+                if (this.Rectangle.Intersects(screen.Devil.Rectangle))
+                {
+                    Pickup(screen.Devil);
+                }
+                else if (this.Rectangle.Intersects(screen.Petrus.Rectangle))
+                {
+                    Pickup(screen.Petrus);
+                }
             }
             else
             {
@@ -93,6 +103,11 @@ namespace DieHoelleIstVoll
                     }
                 }
             }
+        }
+
+        private void Pickup(Player player)
+        {
+            player.PowerUp = this.type;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace DieHoelleIstVoll
         public bool IsEvil;
         public int SoulCount = 4;
         public int Hp = 5;
+        public PowerupType PowerUp = PowerupType.None;
 
         protected bool triggered = false;
         protected Keys keyLeft;
