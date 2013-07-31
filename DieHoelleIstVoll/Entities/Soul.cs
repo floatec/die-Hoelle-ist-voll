@@ -4,44 +4,54 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DieHoelleIstVoll
 {
-    public enum SoulEffect
-    {
-        None
-    }
-
     class Soul : Entity
     {
         public const float SPEED = 300;
 
-        private SoulEffect effect;
         private bool isEvil;
-        private bool isNew=false;
+        public bool IsEvil
+        {
+            get { return isEvil; }
+            set
+            {
+                isEvil = value;
+
+                if (isEvil)
+                {
+                    this.color = Color.Magenta;
+                    this.rotation = MathHelper.Pi;
+                }
+                else
+                {
+                    this.color = Color.Blue;
+                    this.rotation = 0;
+                }
+            }
+        }
+        private bool isNew = false;
 
         public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
-            this.isEvil = isEvil;
-            this.color = Color.Blue;
-            if (this.isEvil)
-            {
-                this.color = Color.Magenta;
-                this.rotation = MathHelper.Pi;
-            }
-            
+            this.IsEvil = isEvil;           
         }
-        public Soul(GameScreen screen, Vector2 position, bool isEvil,bool isNew)
-            : this(screen,position,isEvil)
+
+        public Soul(GameScreen screen, Vector2 position, bool isEvil, bool isNew)
+            : this(screen, position, isEvil)
         {
             this.isNew = isNew;
+
             if (this.isNew)
             {
                 this.color = Color.Yellow;
             }
-            
         }
 
         public override void Update(float dt)
         {
+            if (IsDestroying)
+                return;
+
             //Movement
             if (isEvil)
             {
@@ -65,20 +75,11 @@ namespace DieHoelleIstVoll
             //Collision with screen
             if (isEvil && this.position.Y + this.texture.Height < 0)
             {
-                if (!this.isNew)
-                {
-                    Hit(screen.Petrus);
-                }
-                this.IsDestroying = true;
-                NewSoul();
+                Hit(screen.Petrus);
             }
             else if (!isEvil && this.position.Y > Global.Height)
             {
-                 if(!this.isNew){
-                 Hit(screen.Devil);
-                }
-                this.IsDestroying = true;
-                NewSoul();
+                Hit(screen.Devil);
             }
         }
         protected void NewSoul()
@@ -94,11 +95,7 @@ namespace DieHoelleIstVoll
             }
             else
             {
-                NewSoul();
-                if (!this.isNew)
-                {
-                    Hit(player);
-                }
+                Hit(player);
             }
 
             this.IsDestroying = true;
@@ -106,8 +103,13 @@ namespace DieHoelleIstVoll
 
         protected void Hit(Player player)
         {
-            player.Hp--;
+            if (!this.isNew)
+            {
+                player.Hp--;
+            }
+
             this.IsDestroying = true;
+            NewSoul();
         }
     }
 }
