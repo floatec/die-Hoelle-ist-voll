@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace DieHoelleIstVoll
 {
@@ -11,15 +12,17 @@ namespace DieHoelleIstVoll
         public const int MAX_SOUL = 5;
         public const float MAX_HP = 5;
 
+        public float currentspeed=SPEED;
         public bool IsEvil;
         public int SoulCount = 4;
         public int Hp = 5;
         public PowerupType PowerUp = PowerupType.None;
-
+        public float speedcooldown;
         protected bool triggered = false;
         protected Keys keyLeft;
         protected Keys keyRight;
         protected Keys keyThrow;
+        protected Keys keyPowerup;
 
         public Player(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, isEvil ? Global.Textures["devil"] : Global.Textures["petrus"], position, Color.White, 1.0f)
@@ -29,12 +32,14 @@ namespace DieHoelleIstVoll
                 this.keyLeft = Keys.Left;
                 this.keyRight = Keys.Right;
                 this.keyThrow = Keys.Up;
+                this.keyPowerup = Keys.Down;
             }
             else
             {
                 this.keyLeft = Keys.A;
                 this.keyRight = Keys.D;
                 this.keyThrow = Keys.S;
+                this.keyPowerup = Keys.W;
             }
 
             this.IsEvil = isEvil;
@@ -43,14 +48,21 @@ namespace DieHoelleIstVoll
         public override void Update(float dt)
         {
             KeyboardState keyState = Keyboard.GetState();
-
+            Debug.WriteLine(currentspeed+" "+speedcooldown);
+            speedcooldown += dt;
             if (keyState.IsKeyDown(keyLeft) && this.position.X > 0)
             {
-               this.position.X -= SPEED * dt;
+                this.position.X -=(speedcooldown<3?currentspeed : SPEED) * dt;
             }
             else if (keyState.IsKeyDown(keyRight) && this.position.X + this.texture.Width < Global.Width)
             {
-                this.position.X += SPEED * dt;
+                this.position.X += (speedcooldown < 3 ? currentspeed : SPEED) * dt;
+            }
+            if (keyState.IsKeyDown(keyPowerup))
+            {
+                usePowerup();
+                PowerUp = PowerupType.None;
+                
             }
 
             if (!triggered && keyState.IsKeyDown(keyThrow))
@@ -69,7 +81,25 @@ namespace DieHoelleIstVoll
                 triggered = false;
             }
         }
+        private void usePowerup()
+        {
+            if (this.PowerUp == PowerupType.Move && this.IsEvil)
+            {
+                Player petrus = ((GameScreen)screen).Petrus;
+                petrus.speedcooldown = 0;
+                petrus.currentspeed = Player.SPEED * 0.5f;
+            }
+            if (this.PowerUp == PowerupType.Move && !this.IsEvil)
+            {
+                this.speedcooldown = 0;
+                this.currentspeed = Player.SPEED * 1.5f;
+            }
+            if (this.PowerUp == PowerupType.Fire && !this.IsEvil)
+            {
+                Soul.unvisiblecount = 0;
+            }
 
+        }
        
     }
 }

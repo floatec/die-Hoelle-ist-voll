@@ -34,7 +34,7 @@ namespace DieHoelleIstVoll
         {
             KeyboardState keyState = Keyboard.GetState();
             gametime += dt;
-
+            Soul.unvisiblecount += dt;
             if (gametime >= 3 && GameState == ACTIVE)
             {
                 Petrus.Update(dt);
@@ -53,14 +53,18 @@ namespace DieHoelleIstVoll
                 }
             }
             PowerupSpawmTime += dt;
-            if ((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>15)
+            if ((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>5)
             {
                 PowerupSpawmTime = 0;
                 Vector2 pos = new Vector2(Global.rand.Next(100, Global.Width-100), Global.Height / 2);
                 bool evil = Global.rand.Next(0, 2) == 0 ? false : true;
 
                 Array values = Enum.GetValues(typeof(PowerupType));
-                PowerupType type = (PowerupType)values.GetValue(Global.rand.Next(values.Length));
+                PowerupType type;
+                do
+                {
+                    type = (PowerupType)values.GetValue(Global.rand.Next(values.Length));
+                } while (type==PowerupType.None);
 
                 Powerups.Add(new Powerup(this, pos, evil, type));
             }
@@ -132,7 +136,30 @@ namespace DieHoelleIstVoll
             {
                 spriteBatch.Draw(Global.Textures["dreizackgrey"], new Vector2( Global.Textures["dreizack"].Width * (i ), Global.Height - Global.Textures["soulicon"].Height), Color.White);
             }
+            //powerup
+            //petrus
+            drawPowerup(new Vector2(0, Global.Textures["soulicon"].Height), Petrus, Color.Blue);
+            drawPowerup(new Vector2(0, Global.Height - Global.Textures["soulicon"].Height - Global.Textures["powerup"].Height), Devil, Color.Red);
             
+        }
+
+        private void drawPowerup(Vector2 pos, Player player, Color col)
+        {
+            Texture2D toDraw = Global.Textures["powerup"];
+            if (player.PowerUp == PowerupType.Area)
+            {
+                toDraw = Global.Textures["powerupArea"];
+            }
+            else if (player.PowerUp == PowerupType.Fire)
+            {
+                toDraw = Global.Textures["powerupFire"];
+            }
+            else if (player.PowerUp == PowerupType.Move)
+            {
+                toDraw = Global.Textures["powerupMove"];
+            }
+            spriteBatch.Draw(toDraw, pos, col);
+
         }
     }
 }

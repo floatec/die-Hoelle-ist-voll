@@ -7,7 +7,7 @@ namespace DieHoelleIstVoll
     class Soul : Entity
     {
         public const float SPEED = 300;
-
+        public static float unvisiblecount = 0;
         private bool isEvil;
         public bool IsEvil
         {
@@ -77,6 +77,19 @@ namespace DieHoelleIstVoll
             else if (!isEvil && this.position.Y > Global.Height)
             {
                 Hit(screen.Devil);
+            }
+
+            //powerup fire petrus
+            if (!IsEvil)
+            {
+                if (Soul.unvisiblecount < 3 && position.Y < Global.Height / 2)
+                {
+                    this.color = Color.Transparent;
+                }
+                else
+                {
+                    this.color = Color.Blue;
+                }
             }
         }
         protected void NewSoul()

@@ -19,6 +19,7 @@ namespace DieHoelleIstVoll
 
         private PowerupType type;
         private bool isActive = false;
+        private float lifetime = 0;
 
         private bool isEvil;
         public bool IsEvil
@@ -64,9 +65,11 @@ namespace DieHoelleIstVoll
         public override void Update(float dt)
         {
             List<Soul> souls = this.screen.Souls.Entities;
-
+            lifetime += dt;
+           
             if (isActive)
             {
+                lifetime += dt;
                 if (!isEvil)
                 {
                     this.position.Y -= SPEED * dt;
@@ -87,6 +90,15 @@ namespace DieHoelleIstVoll
             }
             else
             {
+                if (lifetime > Math.PI)
+                {
+                    lifetime = 0;
+                    IsEvil = !isEvil;
+                }
+                float grey = (float)Math.Sin(lifetime);
+                Vector4 col = this.color.ToVector4();
+                col.W = grey;
+                this.color = new Color(col);
                 foreach (Soul s in souls)
                 {
                     if (this.Rectangle.Intersects(s.Rectangle) && !s.IsNew)
@@ -108,6 +120,7 @@ namespace DieHoelleIstVoll
         private void Pickup(Player player)
         {
             player.PowerUp = this.type;
+            this.IsDestroying = true;
         }
     }
 }
