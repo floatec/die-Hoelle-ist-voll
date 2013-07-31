@@ -49,9 +49,6 @@ namespace DieHoelleIstVoll
 
         public override void Update(float dt)
         {
-            if (IsDestroying)
-                return;
-
             //Movement
             if (isEvil)
             {
