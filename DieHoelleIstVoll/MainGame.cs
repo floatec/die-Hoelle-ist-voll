@@ -53,6 +53,7 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("howto", Content.Load<Texture2D>("howtooverley"));
             Global.Textures.Add("powerup", Content.Load<Texture2D>("powerup"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
+            Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
             screen = new GameScreen();
         }

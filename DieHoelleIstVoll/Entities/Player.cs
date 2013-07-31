@@ -12,7 +12,7 @@ namespace DieHoelleIstVoll
         public const float MAX_HP = 5;
 
         public bool IsEvil;
-        public int SoulCount = 3;
+        public int SoulCount = 4;
         public int Hp = 5;
 
         protected bool triggered = false;

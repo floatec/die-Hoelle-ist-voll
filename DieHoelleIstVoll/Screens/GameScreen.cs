@@ -7,12 +7,15 @@ namespace DieHoelleIstVoll
 {
     class GameScreen : Screen
     {
+        public const int ACTIVE=0;
+        public const int GAMEOVER=1;
         public Player Petrus;
         public Player Devil;   
         public EntityManager Souls;
 
         private Texture2D background;
         float gametime = 0;
+        public int GameState = ACTIVE;
 
         public GameScreen()
         {
@@ -27,9 +30,16 @@ namespace DieHoelleIstVoll
         public override void Update(float dt)
         {
             gametime += dt;
-            Petrus.Update(dt);
-            Devil.Update(dt);
-            Souls.Update(dt);  
+            if (gametime >= 3&&GameState==ACTIVE)
+            {
+                Petrus.Update(dt);
+                Devil.Update(dt);
+            }
+            Souls.Update(dt);
+            if (Petrus.Hp <= 0 || Devil.Hp <= 0)
+            {
+                GameState = GAMEOVER;
+            }
         }
 
         public override void Draw()
@@ -42,7 +52,15 @@ namespace DieHoelleIstVoll
             drawInterface();
             float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));
             spriteBatch.Draw(Global.Textures["howto"], Vector2.Zero, new Color(grey,grey,grey,grey));
-            
+            string middle = (int)gametime < 3 ? (int)(4 - gametime)+"" : "go";
+            Vector2 dif = Global.Fonts["count"].MeasureString(middle);
+            spriteBatch.DrawString(Global.Fonts["count"], middle, new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), new Color(grey + 0.4f, grey + 0.4f, grey + 0.4f, grey + 0.4f));
+            if (GameState == GAMEOVER)
+            {
+               dif = Global.Fonts["count"].MeasureString("GAMEOVER");
+                spriteBatch.DrawString(Global.Fonts["count"], "GAMEOVER", new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), Color.White);
+         
+            }
         }
 
         private void drawInterface()
@@ -85,6 +103,7 @@ namespace DieHoelleIstVoll
             {
                 spriteBatch.Draw(Global.Textures["dreizackgrey"], new Vector2( Global.Textures["dreizack"].Width * (i ), Global.Height - Global.Textures["soulicon"].Height), Color.White);
             }
+            
         }
     }
 }
