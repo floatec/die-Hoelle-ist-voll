@@ -61,6 +61,25 @@ namespace DieHoelleIstVoll
                 this.position.Y += SPEED * dt;
             }
 
+            //Collision with blocks
+            if (!this.IsNew)
+            {
+                foreach (Block b in screen.Blocks.Entities)
+                {
+                    if (this.Rectangle.Intersects(b.Rectangle))
+                    {
+                        if (!b.IsEvil) //lightning
+                        {
+                            this.IsEvil = !this.isEvil;
+                        }
+                        else if (b.IsEvil && !this.isEvil) //portal
+                        {
+                            this.Hit(screen.Petrus);
+                        }
+                    }
+                }
+            }
+
             //Collision with player
             if (isEvil && this.Rectangle.Intersects(screen.Petrus.Rectangle))
             {
@@ -80,10 +99,6 @@ namespace DieHoelleIstVoll
             {
                 Hit(screen.Devil);
             }
-
-            //powerup fire petrus
-          
-
         }
         protected void NewSoul()
         {

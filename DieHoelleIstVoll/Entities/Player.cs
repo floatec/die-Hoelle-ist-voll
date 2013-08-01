@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace DieHoelleIstVoll
 {
@@ -91,20 +90,27 @@ namespace DieHoelleIstVoll
                 petrus.speedcooldown = 0;
                 petrus.currentspeed = Player.SPEED * 0.5f;
             }
-            if (this.PowerUp == PowerupType.Move && !this.IsEvil)
+            else if (this.PowerUp == PowerupType.Move && !this.IsEvil)
             {
                 this.speedcooldown = 0;
                 this.currentspeed = Player.SPEED * 1.5f;
             }
-            if (this.PowerUp == PowerupType.Fire && this.IsEvil)
+            else if (this.PowerUp == PowerupType.Fire && this.IsEvil)
             {
                 Soul.unvisiblecount = 0;
             }
-            if (this.PowerUp == PowerupType.Fire && !this.IsEvil)
+            else if (this.PowerUp == PowerupType.Fire && !this.IsEvil)
             {
                 Soul.slowingcount = 0; ;
             }
-
+            else if (this.PowerUp == PowerupType.Area && this.IsEvil)
+            {
+                screen.Blocks.Add(new Block(screen, new Vector2(position.X, position.Y), true));
+            }
+            else if (this.PowerUp == PowerupType.Area && !this.IsEvil)
+            {
+                screen.Blocks.Add(new Block(screen, new Vector2(0, 90), false));
+            }
         }
        
     }

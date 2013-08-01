@@ -13,6 +13,7 @@ namespace DieHoelleIstVoll
         public Player Devil;   
         public EntityManager<Soul> Souls;
         public EntityManager<Powerup> Powerups;
+        public EntityManager<Block> Blocks;
 
         private Texture2D background;
         float gametime = 0;
@@ -23,11 +24,12 @@ namespace DieHoelleIstVoll
         {
             background = Global.Textures["background"];
             
-
             Petrus = new Player(this, new Vector2(300, 40), false);
             Devil = new Player(this, new Vector2(300, 520), true);
+
             Souls = new EntityManager<Soul>();
             Powerups = new EntityManager<Powerup>();
+            Blocks = new EntityManager<Block>();
         }
 
         public override void Update(float dt)
@@ -36,15 +38,15 @@ namespace DieHoelleIstVoll
             gametime += dt;
             Soul.unvisiblecount += dt;
             Soul.slowingcount += dt;
+
             if (gametime >= 3 && GameState == ACTIVE)
             {
                 Petrus.Update(dt);
                 Devil.Update(dt);
                 Souls.Update(dt);
                 Powerups.Update(dt);
+                Blocks.Update(dt);
             }
-
-            
 
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
@@ -54,7 +56,9 @@ namespace DieHoelleIstVoll
                     game.Screen = new GameScreen();
                 }
             }
+
             PowerupSpawmTime += dt;
+
             if ((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>5)
             {
                 PowerupSpawmTime = 0;
@@ -75,11 +79,13 @@ namespace DieHoelleIstVoll
         public override void Draw()
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            
+
+            Blocks.Draw();
             Petrus.Draw();
             Devil.Draw();
             Souls.Draw();
             Powerups.Draw();
+
             drawInterface();
 
             float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));

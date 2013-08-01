@@ -59,6 +59,7 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("powerupMove", Content.Load<Texture2D>("powerupMove"));
             Global.Textures.Add("lightning", Content.Load<Texture2D>("lightning"));
             Global.Textures.Add("splashscreen", Content.Load<Texture2D>("splashscreen"));
+            Global.Textures.Add("portal", Content.Load<Texture2D>("portal"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
