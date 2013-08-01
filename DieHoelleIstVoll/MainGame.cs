@@ -13,6 +13,8 @@ namespace DieHoelleIstVoll
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Song music;
+
         public Screen Screen;
 
         public MainGame()
@@ -57,6 +59,10 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("powerupMove", Content.Load<Texture2D>("powerupMove"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
+
+            music = Content.Load<Song>("music");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(music);
 
             Screen = new GameScreen();
         }
