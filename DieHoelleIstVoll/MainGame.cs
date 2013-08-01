@@ -63,6 +63,7 @@ namespace DieHoelleIstVoll
             Global.Sounds.Add("hit", Content.Load<SoundEffect>("sfxghost"));
             Global.Sounds.Add("powerup", Content.Load<SoundEffect>("sfxpowerup"));
             Global.Sounds.Add("portal", Content.Load<SoundEffect>("sfxportal"));
+            Global.Sounds.Add("wall", Content.Load<SoundEffect>("sfxwall"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
             music = Content.Load<Song>("music");
