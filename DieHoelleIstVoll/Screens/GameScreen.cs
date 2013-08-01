@@ -7,12 +7,14 @@ namespace DieHoelleIstVoll
 {
     class GameScreen : Screen
     {
+        public int level = 4;
         public const int ACTIVE=0;
         public const int GAMEOVER=1;
         public Player Petrus;
         public Player Devil;   
         public EntityManager<Soul> Souls;
         public EntityManager<Powerup> Powerups;
+        public EntityManager<Block> Blocks;
 
         private Texture2D background;
         float gametime = 0;
@@ -23,11 +25,12 @@ namespace DieHoelleIstVoll
         {
             background = Global.Textures["background"];
             
-
             Petrus = new Player(this, new Vector2(300, 40), false);
             Devil = new Player(this, new Vector2(300, 520), true);
+
             Souls = new EntityManager<Soul>();
             Powerups = new EntityManager<Powerup>();
+            Blocks = new EntityManager<Block>();
         }
 
         public override void Update(float dt)
@@ -36,26 +39,28 @@ namespace DieHoelleIstVoll
             gametime += dt;
             Soul.unvisiblecount += dt;
             Soul.slowingcount += dt;
-            if (gametime >= 3 && GameState == ACTIVE)
+
+            if (gametime >=Math.PI*2  && GameState == ACTIVE)
             {
                 Petrus.Update(dt);
                 Devil.Update(dt);
                 Souls.Update(dt);
                 Powerups.Update(dt);
+                Blocks.Update(dt);
             }
-
-            
 
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
                 GameState = GAMEOVER;
                 if (keyState.IsKeyDown(Keys.Space))
                 {
-                    game.Screen = new GameScreen();
+                    game.Screen = new MenuScreen();
                 }
             }
+
             PowerupSpawmTime += dt;
-            if ((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>5)
+
+            if (((Global.rand.Next(0, 500) <= PowerupSpawmTime*1000&&dt>2)||PowerupSpawmTime>7)&&Powerups.Entities.Count<4&&level>0)
             {
                 PowerupSpawmTime = 0;
                 Vector2 pos = new Vector2(Global.rand.Next(100, Global.Width-100), Global.Height / 2);
@@ -63,10 +68,10 @@ namespace DieHoelleIstVoll
 
                 Array values = Enum.GetValues(typeof(PowerupType));
                 PowerupType type;
-                do
+                do  
                 {
                     type = (PowerupType)values.GetValue(Global.rand.Next(values.Length));
-                } while (type==PowerupType.None);
+                } while (type == PowerupType.None && (level == 3) || (type == PowerupType.None|| type==PowerupType.Area)&& (level == 2)||(type!=PowerupType.Fire)&&(level==1));
 
                 Powerups.Add(new Powerup(this, pos, evil, type));
             }
@@ -75,17 +80,20 @@ namespace DieHoelleIstVoll
         public override void Draw()
         {
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            
+
+            Blocks.Draw();
             Petrus.Draw();
             Devil.Draw();
             Souls.Draw();
             Powerups.Draw();
+
             drawInterface();
 
-            float grey = -(float)((gametime * 0.5 * gametime * 0.5 - 0.4 - 1.5 * gametime * 0.5));
+            float grey =(float) Math.Sin(gametime/2);
             spriteBatch.Draw(Global.Textures["howto"], Vector2.Zero, new Color(grey,grey,grey,grey));
-            string middle = (int)gametime < 3 ? (int)(4 - gametime)+"" : "go";   
+            string middle = ((int)(6 - gametime)>0) ? (int)(6 - gametime) + "" : "go";   
             Vector2 dif = Global.Fonts["count"].MeasureString(middle);
+            if(gametime<Math.PI*2)
             spriteBatch.DrawString(Global.Fonts["count"], middle, new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), new Color(grey + 0.4f, grey + 0.4f, grey + 0.4f, grey + 0.4f));
 
             if (GameState == GAMEOVER)

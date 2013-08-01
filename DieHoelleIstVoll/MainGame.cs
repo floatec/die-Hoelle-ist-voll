@@ -59,18 +59,21 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("powerupMove", Content.Load<Texture2D>("powerupMove"));
             Global.Textures.Add("lightning", Content.Load<Texture2D>("lightning"));
             Global.Textures.Add("splashscreen", Content.Load<Texture2D>("splashscreen"));
+            Global.Textures.Add("portal", Content.Load<Texture2D>("portal"));
+            Global.Textures.Add("portal_spawn", Content.Load<Texture2D>("portal_spawn"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("sfxthrow"));
             Global.Sounds.Add("hit", Content.Load<SoundEffect>("sfxghost"));
             Global.Sounds.Add("powerup", Content.Load<SoundEffect>("sfxpowerup"));
             Global.Sounds.Add("portal", Content.Load<SoundEffect>("sfxportal"));
-            Global.Sounds.Add("wall", Content.Load<SoundEffect>("sfxwall"));
+            Global.Sounds.Add("wall", Content.Load<SoundEffect>("sfxwall"));           
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
+            Global.Fonts.Add("menu", Content.Load<SpriteFont>("menufont"));
 
             music = Content.Load<Song>("music");
             MediaPlayer.IsRepeating = true;
            // MediaPlayer.Play(music);
 
-            Screen = new MenuScreen();
+            Screen = new SplashScreen();
         }
 
         protected override void Update(GameTime gameTime)
