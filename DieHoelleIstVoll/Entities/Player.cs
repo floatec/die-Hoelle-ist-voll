@@ -48,7 +48,7 @@ namespace DieHoelleIstVoll
         public override void Update(float dt)
         {
             KeyboardState keyState = Keyboard.GetState();
-            Debug.WriteLine(currentspeed+" "+speedcooldown);
+          
             speedcooldown += dt;
             if (keyState.IsKeyDown(keyLeft) && this.position.X > 0)
             {
@@ -72,8 +72,8 @@ namespace DieHoelleIstVoll
                 {
                     Global.Sounds["throw"].Play();
                     SoulCount--;
-                    screen.Souls.Add(new Soul(screen, new Vector2(position.X, position.Y), this.IsEvil));
-                }
+                    screen.Souls.Add(new Soul(screen, new Vector2(position.X+texture.Width/2-Global.Textures["soul"].Width/2, position.Y), this.IsEvil));
+                 }
             }
 
             if (keyState.IsKeyUp(keyThrow))

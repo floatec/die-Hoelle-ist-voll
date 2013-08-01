@@ -34,7 +34,8 @@ namespace DieHoelleIstVoll
         public Soul(GameScreen screen, Vector2 position, bool isEvil)
             : base(screen, Global.Textures["soul"], position, Color.White, 1.0f)
         {
-            this.IsEvil = isEvil;           
+            this.IsEvil = isEvil; 
+            
         }
 
         public Soul(GameScreen screen, Vector2 position, bool isEvil, bool isNew)
