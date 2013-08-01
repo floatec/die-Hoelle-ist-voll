@@ -8,6 +8,7 @@ namespace DieHoelleIstVoll
     {
         public const float SPEED = 300;
         public static float unvisiblecount = 0;
+        public static float slowingcount=0;
         private bool isEvil;
         public bool IsEvil
         {
@@ -52,7 +53,7 @@ namespace DieHoelleIstVoll
             //Movement
             if (isEvil)
             {
-                this.position.Y -= SPEED * dt;
+                this.position.Y -= SPEED*(Soul.slowingcount<3?0.5f:1) * dt;
             }
             else
             {
@@ -80,17 +81,8 @@ namespace DieHoelleIstVoll
             }
 
             //powerup fire petrus
-            if (!IsEvil)
-            {
-                if (Soul.unvisiblecount < 3 && position.Y < Global.Height / 2)
-                {
-                    this.color = Color.Transparent;
-                }
-                else
-                {
-                    this.color = Color.Blue;
-                }
-            }
+          
+
         }
         protected void NewSoul()
         {
@@ -120,6 +112,16 @@ namespace DieHoelleIstVoll
 
             this.IsDestroying = true;
             NewSoul();
+        }
+
+        public override void Draw()
+        {
+            if (Soul.unvisiblecount < 3 && position.Y > Global.Height / 2 && !IsNew && isEvil)
+            {
+                return;
+            }
+
+            base.Draw();
         }
     }
 }

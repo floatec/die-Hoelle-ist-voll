@@ -14,7 +14,7 @@ namespace DieHoelleIstVoll
 
         public float currentspeed=SPEED;
         public bool IsEvil;
-        public int SoulCount = 4;
+        public int SoulCount = 3;
         public int Hp = 5;
         public PowerupType PowerUp = PowerupType.None;
         public float speedcooldown;
@@ -94,9 +94,13 @@ namespace DieHoelleIstVoll
                 this.speedcooldown = 0;
                 this.currentspeed = Player.SPEED * 1.5f;
             }
-            if (this.PowerUp == PowerupType.Fire && !this.IsEvil)
+            if (this.PowerUp == PowerupType.Fire && this.IsEvil)
             {
                 Soul.unvisiblecount = 0;
+            }
+            if (this.PowerUp == PowerupType.Fire && !this.IsEvil)
+            {
+                Soul.slowingcount = 0; ;
             }
 
         }

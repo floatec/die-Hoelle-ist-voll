@@ -35,14 +35,16 @@ namespace DieHoelleIstVoll
             KeyboardState keyState = Keyboard.GetState();
             gametime += dt;
             Soul.unvisiblecount += dt;
+            Soul.slowingcount += dt;
             if (gametime >= 3 && GameState == ACTIVE)
             {
                 Petrus.Update(dt);
                 Devil.Update(dt);
+                Souls.Update(dt);
+                Powerups.Update(dt);
             }
 
-            Souls.Update(dt);
-            Powerups.Update(dt);
+            
 
             if (Petrus.Hp <= 0 || Devil.Hp <= 0)
             {
