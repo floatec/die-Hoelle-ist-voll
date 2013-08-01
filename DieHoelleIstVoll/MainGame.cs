@@ -57,6 +57,8 @@ namespace DieHoelleIstVoll
             Global.Textures.Add("powerupArea", Content.Load<Texture2D>("powerupArea"));
             Global.Textures.Add("powerupFire", Content.Load<Texture2D>("powerupFire"));
             Global.Textures.Add("powerupMove", Content.Load<Texture2D>("powerupMove"));
+            Global.Textures.Add("lightning", Content.Load<Texture2D>("lightning"));
+            Global.Textures.Add("splashscreen", Content.Load<Texture2D>("splashscreen"));
             Global.Sounds.Add("throw",Content.Load<SoundEffect>("throw"));
             Global.Fonts.Add("count",Content.Load<SpriteFont>("countfont"));
 
@@ -64,7 +66,7 @@ namespace DieHoelleIstVoll
             MediaPlayer.IsRepeating = true;
            // MediaPlayer.Play(music);
 
-            Screen = new GameScreen();
+            Screen = new MenuScreen();
         }
 
         protected override void Update(GameTime gameTime)
