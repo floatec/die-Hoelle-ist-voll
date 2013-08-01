@@ -13,6 +13,7 @@ namespace DieHoelleIstVoll
         public const float MAX_HP = 5;
 
         public float currentspeed=SPEED;
+        public float throwcount = 0;
         public bool IsEvil;
         public int SoulCount = 3;
         public int Hp = 5;
@@ -48,7 +49,7 @@ namespace DieHoelleIstVoll
         public override void Update(float dt)
         {
             KeyboardState keyState = Keyboard.GetState();
-          
+            throwcount += dt;
             speedcooldown += dt;
             if (keyState.IsKeyDown(keyLeft) && this.position.X > 0)
             {
@@ -65,8 +66,9 @@ namespace DieHoelleIstVoll
                 
             }
 
-            if (!triggered && keyState.IsKeyDown(keyThrow))
+            if (!triggered && keyState.IsKeyDown(keyThrow)&&throwcount>0.7)
             {
+                throwcount = 0;
                 triggered = true;
                 if (SoulCount > 0)
                 {
