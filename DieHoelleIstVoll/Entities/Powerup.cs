@@ -95,16 +95,20 @@ namespace DieHoelleIstVoll
                     lifetime = 0;
                     IsEvil = !isEvil;
                 }
-                float grey = (float)Math.Sin(lifetime);
+
+                float alpha = (float)Math.Sin(lifetime);
                 Vector4 col = this.color.ToVector4();
-                col.W = grey;
+                col.W = alpha;
                 this.color = new Color(col);
+
                 foreach (Soul s in souls)
                 {
                     if (this.Rectangle.Intersects(s.Rectangle) && !s.IsNew)
                     {
                         if (this.isEvil == s.IsEvil)
                         {
+                            col.W = 1;
+                            this.color = new Color(col);
                             this.isActive = true;
                         }
                         else
