@@ -123,6 +123,7 @@ namespace DieHoelleIstVoll
         {
             if (!this.IsNew)
             {
+                Global.Sounds["hit"].Play();
                 player.Hp--;
             }
 

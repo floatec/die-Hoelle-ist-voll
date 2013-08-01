@@ -45,6 +45,7 @@ namespace DieHoelleIstVoll
         public Powerup(GameScreen screen, Vector2 position, bool isEvil, PowerupType type) :
             base(screen, Global.Textures["powerup"], position, Color.White, 1.0f)
         {
+            Global.Sounds["powerup"].Play();
             this.IsEvil = isEvil;
             this.type = type;
 
