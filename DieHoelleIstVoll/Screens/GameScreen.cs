@@ -90,12 +90,13 @@ namespace DieHoelleIstVoll
             drawInterface();
 
             float grey =(float) Math.Sin(gametime/2);
+            if (gametime < Math.PI * 2)
             spriteBatch.Draw(Global.Textures["howto"], Vector2.Zero, new Color(grey,grey,grey,grey));
             string middle = ((int)(6 - gametime)>0) ? (int)(6 - gametime) + "" : "go";   
             Vector2 dif = Global.Fonts["count"].MeasureString(middle);
             if(gametime<Math.PI*2)
             spriteBatch.DrawString(Global.Fonts["count"], middle, new Vector2((Global.Width - dif.X) / 2, (Global.Height - dif.Y) / 2), new Color(grey + 0.4f, grey + 0.4f, grey + 0.4f, grey + 0.4f));
-
+             
             if (GameState == GAMEOVER)
             {
                 dif = Global.Fonts["count"].MeasureString("GAMEOVER");

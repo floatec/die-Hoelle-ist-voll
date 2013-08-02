@@ -19,7 +19,7 @@ namespace DieHoelleIstVoll
 
                 if (isEvil)
                 {
-                    this.color = Color.Magenta;
+                    this.color = Color.Red;
                     this.rotation = MathHelper.Pi;
                 }
                 else
@@ -45,7 +45,7 @@ namespace DieHoelleIstVoll
 
             if (this.IsNew)
             {
-                this.color = Color.Yellow;
+                this.color = Color.White;
             }
         }
 

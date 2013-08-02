@@ -50,11 +50,11 @@ namespace DieHoelleIstVoll
                 }
                 else if (state == 4)
                 {
-                    //credits
+                    game.Screen = new CreditsScreen();
                 }
                 else
                 {
-                    //exit
+                    game.Exit();
                 }
             }
             if (Keyboard.GetState().IsKeyUp(Keys.Enter) && Keyboard.GetState().IsKeyUp(Keys.Up) && Keyboard.GetState().IsKeyUp(Keys.Down) && Keyboard.GetState().IsKeyUp(Keys.Space))
@@ -69,28 +69,28 @@ namespace DieHoelleIstVoll
             spriteBatch.Draw(Global.Textures["background"], Vector2.Zero, Color.White);
             string middle = "EASY";
             Vector2 dif = Global.Fonts["menu"].MeasureString(middle);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 0 + 30), state == 0 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-1) / 2, (dif.Y) * 0 + 29), state == 0 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 0 + 30), state == 0 ? Color.Red : Color.LightGray);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-3) / 2, (dif.Y) * 0 +27), state == 0 ? Color.Blue : Color.White);
             middle = "MIDDLE";
             dif = Global.Fonts["menu"].MeasureString(middle);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y)*1 + 30), state == 1 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-1) / 2, (dif.Y) * 1 + 29), state == 1 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y)*1 + 30), state == 1 ? Color.Red : Color.LightGray);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-3) / 2, (dif.Y) * 1 +27), state == 1 ? Color.Blue : Color.White);
             middle = "HARD";
             dif = Global.Fonts["menu"].MeasureString(middle);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 2 + 30), state == 2 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-1) / 2, (dif.Y) * 2 + 29), state == 2 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 2 + 30), state == 2 ? Color.Red : Color.LightGray);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X-3) / 2, (dif.Y) * 2 +27), state == 2 ? Color.Blue : Color.White);
             middle= "EVIL";
             dif = Global.Fonts["menu"].MeasureString(middle);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 3 + 30), state == 3 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X - 1) / 2, (dif.Y) * 3 + 29), state == 3 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 3 + 30), state == 3 ? Color.Red : Color.LightGray);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X -3) / 2, (dif.Y) * 3 +27), state == 3 ? Color.Blue : Color.White);
             middle = "CREDITS";
             dif = Global.Fonts["menu"].MeasureString(middle);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 4 + 30), state == 4 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X - 1) / 2, (dif.Y) * 4 + 29), state == 4 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 4 + 30), state == 4 ? Color.Red : Color.LightGray);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X -3) / 2, (dif.Y) * 4 +27), state == 4 ? Color.Blue : Color.White);
             middle = "EXIT";
             dif = Global.Fonts["menu"].MeasureString(middle);
             spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X) / 2, (dif.Y) * 5 + 30), state == 5 ? Color.Blue : Color.LightGray);
-            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X - 1) / 2, (dif.Y) * 5 + 29), state == 5 ? Color.Blue : Color.White);
+            spriteBatch.DrawString(Global.Fonts["menu"], middle, new Vector2((Global.Width - dif.X -3) / 2, (dif.Y) * 5 +27), state == 5 ? Color.Blue : Color.White);
            
            
         }
